@@ -21,7 +21,7 @@ const Repository = () => {
 
   useEffect(() => {
     handleSearch();
-  }, []);
+  }, [handleSearch]);
 
   return (
     <>
