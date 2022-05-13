@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useFetch } from "../components/hooks/useFetch";
 
@@ -13,12 +13,13 @@ const Repository = () => {
     }
   }, [location]);
 
+  const handleSearch = useCallback(async () => {
+    await fetchData(
+      `https://api.github.com/search/issues?q=repo:${itemRef.current?.login}/${itemRef.current?.name}`
+    );
+  }, [fetchData]);
+
   useEffect(() => {
-    const handleSearch = async () => {
-      await fetchData(
-        `https://api.github.com/search/issues?q=repo:${itemRef.current?.login}/${itemRef.current?.name}`
-      );
-    };
     handleSearch();
   }, []);
 
