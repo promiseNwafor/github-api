@@ -13,7 +13,8 @@ type Props = {
 const Card: React.FC<Props> = ({ item }) => {
   const nagivate = useNavigate();
 
-  const handleNavigate = () => nagivate(`/${item.id}`);
+  const handleNavigate = () =>
+    nagivate(`/${item.id}`, { state: { ...item.owner, name: item.name } });
 
   return (
     <div key={item.id} className="col-md-6 col-lg-4 p-3">
@@ -41,9 +42,7 @@ const Card: React.FC<Props> = ({ item }) => {
           alt={item.private ? "private" : "public"}
         />
         <p onClick={handleNavigate} className="view">
-          {/* <Link to={`/${item.id}`} className="view"> */}
-          &#x2192;
-          {/* </Link> */}
+          Issues &#x2192;
         </p>
       </div>
     </div>
