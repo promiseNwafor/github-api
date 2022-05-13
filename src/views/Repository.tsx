@@ -1,27 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useFetch } from "../components/hooks/useFetch";
 
 const Repository = () => {
   const location = useLocation();
   const { fetchData, data } = useFetch();
-  let item: any;
+  const itemRef = useRef<any>();
 
   useEffect(() => {
     if (location) {
-      item = location.state;
+      itemRef.current = location.state;
     }
   }, [location]);
 
   const handleSearch = async () => {
     await fetchData(
-      `https://api.github.com/search/issues?q=repo:${item?.login}/${item?.name}`
+      `https://api.github.com/search/issues?q=repo:${itemRef.current?.login}/${itemRef.current?.name}`
     );
   };
 
   useEffect(() => {
     handleSearch();
-  }, []);
+  }, [handleSearch]);
 
   return (
     <>
