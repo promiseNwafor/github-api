@@ -13,15 +13,14 @@ const Repository = () => {
     }
   }, [location]);
 
-  const handleSearch = async () => {
-    await fetchData(
-      `https://api.github.com/search/issues?q=repo:${itemRef.current?.login}/${itemRef.current?.name}`
-    );
-  };
-
   useEffect(() => {
+    const handleSearch = async () => {
+      await fetchData(
+        `https://api.github.com/search/issues?q=repo:${itemRef.current?.login}/${itemRef.current?.name}`
+      );
+    };
     handleSearch();
-  }, [handleSearch]);
+  }, []);
 
   return (
     <>
